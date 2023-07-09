@@ -49,12 +49,11 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
+        System.out.println(login + " " + password);
+
         if (model.isExist(login, password)){
             HttpSession session = req.getSession();
             session.setAttribute("user", login);
-
-//            RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/loginOK.jsp");
-//            dispatcher.forward(req, resp);
 
             resp.sendRedirect("/loginOK.jsp");
 
@@ -62,12 +61,14 @@ public class LoginServlet extends HttpServlet {
             // вывести на этой же странице, что пароль или логин не верный.
             RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/loginNotOK.jsp");
             dispatcher.forward(req, resp);
+
+
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // этот метод отдает результат во вьюху.
+        // этот метод показывает первононачальное состояние вьюхи.
 
         RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/login.jsp");
         dispatcher.forward(req, resp);

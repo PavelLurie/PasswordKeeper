@@ -9,18 +9,51 @@
 <html>
 <head>
     <title>LogIn</title>
-    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css">
+    <%--<link href="${pageContext.request.contextPath}/WEB_INF/style.css" rel="stylesheet" type="text/css">--%>
+    <style>
+        <%@include file="/WEB_INF/style.css"%>
+    </style>
 </head>
 
 <body>
 <form class="form" action="" method="post">
-    <input class="input" type="text" placeholder="e-mail" id="login" name="login">
+    <input checked="" id="signin" name="action" type="radio" value="signin">
+    <label for="signin">Sign in</label>
+    <input id="signup" name="action" type="radio" value="signup">
+    <label for="signup">Sign up</label>
+    <input id="reset" name="action" type="radio" value="reset">
+    <label for="reset">Reset</label>
+    <div id="wrapper">
+        <div id="arrow"></div>
+        <input id="email" placeholder="Email" type="text" name="login">
+        <input id="pass" placeholder="Password" type="password" name="password">
+        <input id="repass" placeholder="Repeat password" type="password" name="repass">
+    </div>
+    <button type="submit">
+    <span>
+      Reset password
+      <br>
+      Sign in
+      <br>
+      Sign up
+    </span>
+    </button>
+</form>
+</body>
 
+<%--<body>
+<form class="form" action="" method="post">
+    <input checked="" id="signin" name="action" type="radio" value="signin">
+    <label for="signin">Sign in</label>
+    <input id="signup" name="action" type="radio" value="signup">
+    <label for="signup">Sign up</label>
+    <input class="input" type="text" placeholder="e-mail" id="login" name="login">
     <input class="input" type="password" placeholder="Пароль" id="password" name="password">
+
 
     <button class="btn" type="submit">Войти</button>
 </form>
-</body>
+</body>--%>
 </html>
 
 <%--<input class="input" type="password" placeholder="Пароль еще раз" id="passconf" name="passconf">--%>
