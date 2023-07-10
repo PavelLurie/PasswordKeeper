@@ -1,17 +1,12 @@
 package Controller;
 
-import DAO.UserDAO;
+
 import Model.UserModel;
-
-
 import Model.UserModelIml;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,12 +14,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-@WebServlet("")
-public class LoginServlet extends HttpServlet {
+public class SignUpServlet extends HttpServlet {
     private Connection connection;
     private UserModel model;
-
-
 
     @Override
     public void init() throws ServletException {
@@ -42,41 +34,22 @@ public class LoginServlet extends HttpServlet {
         this.model = new UserModelIml();
     }
 
-
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        String signUp = req.getParameter("action2");
+        String repass = req.getParameter("repass");
 
-
-        if (signUp != null){
-            SignUpServlet signUpServlet = new SignUpServlet();
-            signUpServlet.init();
-            signUpServlet.doPost(req, resp);
-        }
-
-
-
-        if (model.isExist(login, password)){
-            HttpSession session = req.getSession();
-            session.setAttribute("user", login);
-
-            resp.sendRedirect("/loginOK.jsp");
-
-        } else {
-            // вывести на этой же странице, что пароль или логин не верный.
-            RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/loginNotOK.jsp");
-            dispatcher.forward(req, resp);
+        if (password.equals(repass)){
+            model.createUser(login, password);
+        }else {
+            PrintWriter pw = resp.getWriter();
+            pw.write("Password mismatch");
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // этот метод показывает первононачальное состояние вьюхи.
 
-        RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/login.jsp");
-        dispatcher.forward(req, resp);
     }
 }

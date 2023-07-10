@@ -14,8 +14,16 @@ public class UserDAOImpl implements UserDAO{
     private Connection connection = ConnectionToDatabase.getJDBCConnection();
 
     @Override
-    public void createUser() {
+    public void createUser(String name, String password) {
+        String sqlRequest = "INSERT INTO users(name, password) VALUES (?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sqlRequest)) {
+                preparedStatement.setString(1, name);
+                preparedStatement.setString(2, password);
 
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
     }
 
     @Override
