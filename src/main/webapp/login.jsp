@@ -17,11 +17,12 @@
 
 <body>
 <form class="form" action="" method="post">
-    <input checked="" id="signin" name="action1" type="radio" value="signin">
+
+    <input checked="" id="signin" name="signin" type="radio" value="signin">
     <label for="signin">Sign in</label>
-    <input id="signup" name="action2" type="radio" value="signup">
+    <input id="signup" name="signup" type="radio" value="signup">
     <label for="signup">Sign up</label>
-    <input id="reset" name="action3" type="radio" value="reset">
+    <input id="reset" name="reset" type="radio" value="reset">
     <label for="reset">Reset</label>
     <div id="wrapper">
         <div id="arrow"></div>
@@ -39,6 +40,12 @@
     </span>
     </button>
 </form>
+<div id="hint">Click on the tabs</div>
+
+<script type="text/javascript">
+
+</script>
+
 </body>
 
 <%--<body>

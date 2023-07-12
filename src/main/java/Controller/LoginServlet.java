@@ -19,7 +19,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-@WebServlet("")
+
 public class LoginServlet extends HttpServlet {
     private Connection connection;
     private UserModel model;
@@ -46,17 +46,14 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        String signUp = req.getParameter("action2");
 
+        System.out.println("===================================");
+        System.out.println("сработал LoginServlet");
 
-        if (signUp != null){
-            SignUpServlet signUpServlet = new SignUpServlet();
-            signUpServlet.init();
-            signUpServlet.doPost(req, resp);
-        }
-
+        System.out.println(login + " " + password);
 
 
         if (model.isExist(login, password)){
@@ -67,8 +64,10 @@ public class LoginServlet extends HttpServlet {
 
         } else {
             // вывести на этой же странице, что пароль или логин не верный.
-            RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/loginNotOK.jsp");
-            dispatcher.forward(req, resp);
+            PrintWriter pw = resp.getWriter();
+            pw.write("Password notOk");
+//            RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/loginNotOK.jsp");
+//            dispatcher.forward(req, resp);
         }
     }
 

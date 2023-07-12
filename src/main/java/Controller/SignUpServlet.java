@@ -3,6 +3,7 @@ package Controller;
 
 import Model.UserModel;
 import Model.UserModelIml;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,16 +41,28 @@ public class SignUpServlet extends HttpServlet {
         String password = req.getParameter("password");
         String repass = req.getParameter("repass");
 
+        System.out.println("===================================");
+        System.out.println("сработал SignUpServlet");
+        System.out.println(login + " " + password + " " + repass);
+
+
         if (password.equals(repass)){
             model.createUser(login, password);
+            RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/signupOK.jsp");
+            dispatcher.forward(req, resp);
+
+
         }else {
             PrintWriter pw = resp.getWriter();
-            pw.write("Password mismatch");
+            pw.write("Password notOk");
+            System.out.println("отработал else");
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+//        PrintWriter pw = resp.getWriter();
+//        pw.write("OK");
     }
 }
