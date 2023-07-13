@@ -41,28 +41,28 @@ public class SignUpServlet extends HttpServlet {
         String password = req.getParameter("password");
         String repass = req.getParameter("repass");
 
-        System.out.println("===================================");
-        System.out.println("сработал SignUpServlet");
-        System.out.println(login + " " + password + " " + repass);
+
+        if (model.emailValidator(login)) {
+
+            if (password.equals(repass)) {
+                model.createUser(login, password);
+                RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/signupOK.jsp");
+                dispatcher.forward(req, resp);
 
 
-        if (password.equals(repass)){
-            model.createUser(login, password);
-            RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/signupOK.jsp");
-            dispatcher.forward(req, resp);
+            } else {
+                PrintWriter pw = resp.getWriter();
+                pw.write("Password notOk");
 
-
+            }
         }else {
             PrintWriter pw = resp.getWriter();
-            pw.write("Password notOk");
-            System.out.println("отработал else");
+            pw.write("E-mail notOk");
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        PrintWriter pw = resp.getWriter();
-//        pw.write("OK");
     }
 }
