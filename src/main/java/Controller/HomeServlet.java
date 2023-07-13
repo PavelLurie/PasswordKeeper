@@ -11,28 +11,17 @@ import java.io.IOException;
 
 @WebServlet("")
 public class HomeServlet extends HttpServlet {
-    @Override
-    public void init() throws ServletException {
-
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String signUp = req.getParameter("signup");
-        String signIn = req.getParameter("signin");
-        String reset = req.getParameter("reset");
+        String action = req.getParameter("action");
 
-        System.out.println("signIn is " + signIn);
-        System.out.println("signUp is " + signUp);
-        System.out.println("reset is " + reset);
-
-        LoginServlet loginServlet = new LoginServlet();
-        SignUpServlet signUpServlet = new SignUpServlet();
-
-        if (signUp != null){
+        if (action.equals("signup")){
+            SignUpServlet signUpServlet = new SignUpServlet();
             signUpServlet.init();
             signUpServlet.doPost(req, resp);
-        } else if (signIn != null) {
+        } else if (action.equals("signin")) {
+            LoginServlet loginServlet = new LoginServlet();
             loginServlet.init();
             loginServlet.doPost(req, resp);
         }

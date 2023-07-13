@@ -18,11 +18,11 @@
 <body>
 <form class="form" action="" method="post">
 
-    <input checked="" id="signin" name="signin" type="radio" value="signin">
+    <input checked="" id="signin" name="action" type="radio" value="signin">
     <label for="signin">Sign in</label>
-    <input id="signup" name="signup" type="radio" value="signup">
+    <input id="signup" name="action" type="radio" value="signup">
     <label for="signup">Sign up</label>
-    <input id="reset" name="reset" type="radio" value="reset">
+    <input id="reset" name="action" type="radio" value="reset">
     <label for="reset">Reset</label>
     <div id="wrapper">
         <div id="arrow"></div>
