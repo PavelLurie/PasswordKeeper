@@ -1,4 +1,4 @@
-package Service;
+package entity;
 
 public class User {
     private long id;

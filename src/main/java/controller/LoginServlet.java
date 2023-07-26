@@ -1,13 +1,12 @@
-package Controller;
+package controller;
 
-import DAO.UserDAO;
-import Model.UserModel;
+import jakarta.servlet.annotation.WebServlet;
+import model.UserModel;
 
 
-import Model.UserModelIml;
+import model.UserModelIml;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -54,8 +53,7 @@ public class LoginServlet extends HttpServlet {
         if (model.isExist(login, password)){
             HttpSession session = req.getSession();
             session.setAttribute("user", login);
-
-            resp.sendRedirect("/loginOK.jsp");
+            resp.sendRedirect("/loginOK");
 
         } else {
             // вывести на этой же странице, что пароль или логин не верный.

@@ -1,20 +1,21 @@
-package Controller;
+package controller;
 
-import Model.UserModel;
-import Model.UserModelIml;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.UserModel;
+import model.UserModelIml;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class SignUpServlet extends HttpServlet {
+@WebServlet("/loginOK")
+public class AddNewPasswordServlet extends HttpServlet {
     private Connection connection;
     private UserModel model;
 
@@ -36,32 +37,23 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        String repass = req.getParameter("repass");
+        String a = req.getParameter("action");
 
 
-        if (model.emailValidator(login)) {
-
-            if (password.equals(repass)) {
-                model.createUser(login, password);
-                RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/signupOK.jsp");
-                dispatcher.forward(req, resp);
-
-
-            } else {
-                PrintWriter pw = resp.getWriter();
-                pw.write("Password notOk");
-
-            }
-        }else {
-            PrintWriter pw = resp.getWriter();
-            pw.write("E-mail notOk");
+        if (a.equals("add")) {
+            String name = req.getParameter("name");
+            String site = req.getParameter("site");
+            String login = req.getParameter("login");
+            String password = req.getParameter("pass");
+            int idUser = 1; // получить id вошедшего пользователя
+            model.createUserPassTable();
+            model.addUserPass(name, site,login,password, idUser);
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/loginOK.jsp");
+        dispatcher.forward(req, resp);
     }
 }

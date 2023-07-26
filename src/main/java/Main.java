@@ -1,6 +1,6 @@
-import DAO.UserDAO;
-import DAO.UserDAOImpl;
-import Service.User;
+import dao.UserDAO;
+import dao.UserDAOImpl;
+import entity.User;
 
 import java.util.ArrayList;
 import java.util.List;

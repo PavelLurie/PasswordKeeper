@@ -1,8 +1,8 @@
-package Model;
+package model;
 
-import DAO.UserDAO;
-import DAO.UserDAOImpl;
-import Service.User;
+import dao.UserDAO;
+import dao.UserDAOImpl;
+import entity.User;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +10,17 @@ import java.util.regex.Pattern;
 
 public class UserModelIml implements UserModel {
     UserDAO userDAO = new UserDAOImpl();
+
+    @Override
+    public void createUserPassTable() {
+        System.out.println("work UserModelImpl");
+        userDAO.createUserPassTable();
+    }
+
+    @Override
+    public void addUserPass(String name, String site, String login, String password, int idUser) {
+        userDAO.addUserPass(name, site, login, password, idUser);
+    }
 
     @Override
     public void createUser(String name, String password) {
