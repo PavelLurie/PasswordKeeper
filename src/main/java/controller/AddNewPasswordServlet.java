@@ -47,7 +47,7 @@ public class AddNewPasswordServlet extends HttpServlet {
             String password = req.getParameter("pass");
             int idUser = 1; // получить id вошедшего пользователя
             model.createUserPassTable();
-            model.addUserPass(name, site,login,password, idUser);
+            model.addUserPass(name, site, login, password, idUser);
         }
     }
 

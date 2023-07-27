@@ -12,7 +12,7 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public void createUserPassTable() {
-        String sqlRequest = "CREATE TABLE IF NOT EXISTS users_pass(id SERIAL PRIMARY KEY, name VARCHAR(45), site VARCHAR(30), login VARCHAR(100), password VARCHAR(100), id_user INT, FOREIGN KEY (id_user) REFERENCES users(id))";
+        String sqlRequest = "CREATE TABLE IF NOT EXISTS users_pass(id SERIAL PRIMARY KEY, name VARCHAR(45), site VARCHAR(30), login VARCHAR(100), password VARCHAR(100), user_id INT REFERENCES users(id))";
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sqlRequest);
@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public void addUserPass(String name, String site, String login, String password, int idUser) {
-        String sqlRequest = "INSERT INTO users_pass(name, site, login, password, idUser) VALUES (?, ?, ?, ?, ?)";
+        String sqlRequest = "INSERT INTO users_pass(name, site, login, password, id_user) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlRequest)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, site);

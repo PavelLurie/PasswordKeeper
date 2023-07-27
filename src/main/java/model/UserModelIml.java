@@ -13,7 +13,6 @@ public class UserModelIml implements UserModel {
 
     @Override
     public void createUserPassTable() {
-        System.out.println("work UserModelImpl");
         userDAO.createUserPassTable();
     }
 
