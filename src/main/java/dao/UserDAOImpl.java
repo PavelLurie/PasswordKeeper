@@ -53,10 +53,10 @@ public class UserDAOImpl implements UserDAO{
     public List<User> getAllUsers() {
         ArrayList<User> users = new ArrayList<>();
 
-        try (PreparedStatement ps = connection.prepareStatement("SELECT name, password FROM users")){
+        try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM users")){
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                users.add(new User(rs.getString("name"), rs.getString("password")));
+                users.add(new User(rs.getInt("id"), rs.getString("name"), rs.getString("password")));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -10,6 +10,15 @@ import java.util.regex.Pattern;
 
 public class UserModelIml implements UserModel {
     UserDAO userDAO = new UserDAOImpl();
+    ModelDate modelDate = new ModelDate();
+
+    public ModelDate getModelDate() {
+        return modelDate;
+    }
+
+    public void setModelDate(ModelDate modelDate) {
+        this.modelDate = modelDate;
+    }
 
     @Override
     public void createUserPassTable() {
@@ -23,6 +32,7 @@ public class UserModelIml implements UserModel {
 
     @Override
     public void createUser(String name, String password) {
+
         userDAO.createUser(name, password);
     }
 
@@ -48,5 +58,27 @@ public class UserModelIml implements UserModel {
         }else {
             return false;
         }
+    }
+
+    @Override
+    public int getIdFromTable(String login, String password) {
+        for (User user : userDAO.getAllUsers()){
+            if (user.getLogin().equals(login) &&
+                    user.getPassword().equals(password)){
+                return user.getId();
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public User getIdFromTable2(String login, String password) {
+        for (User user : userDAO.getAllUsers()){
+            if (user.getLogin().equals(login) &&
+                    user.getPassword().equals(password)){
+                return user;
+            }
+        }
+        return null;
     }
 }

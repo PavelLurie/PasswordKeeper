@@ -14,16 +14,37 @@ public class Main {
             System.out.println("Неправильный пароль или логин");
         }
 
+        //System.out.println(userDAO.getAllUsers());
+        Test test = new Test();
+        test.math();
+        System.out.println(test.getA());
+
     }
 
     public static List<Integer> check(){
         List<Integer> indices = new ArrayList<>();
-        User user = new User("user3", "qwerty78");
+        User user = new User(2, "user2", "qwerty");
         for (int i = 0; i < userDAO.getAllUsers().size(); i++) {
             if (userDAO.getAllUsers().get(i).toString().equals(user.toString())) {
                 indices.add(i);
             }
         }
         return indices;
+    }
+}
+
+class Test{
+     private int a;
+
+    public int getA() {
+        return a;
+    }
+
+    public void setA(int a) {
+        this.a = a;
+    }
+
+    public void math(){
+        setA(5);
     }
 }

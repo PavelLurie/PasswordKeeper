@@ -15,9 +15,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 @WebServlet("/loginOK")
-public class AddNewPasswordServlet extends HttpServlet {
+public class AddNewPasswordServlet extends HttpServlet implements AbstractServlet {
+
     private Connection connection;
-    private UserModel model;
 
     @Override
     public void init() throws ServletException {
@@ -32,7 +32,6 @@ public class AddNewPasswordServlet extends HttpServlet {
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
-        this.model = new UserModelIml();
     }
 
     @Override
@@ -45,9 +44,16 @@ public class AddNewPasswordServlet extends HttpServlet {
             String site = req.getParameter("site");
             String login = req.getParameter("login");
             String password = req.getParameter("pass");
-            int idUser = 1; // получить id вошедшего пользователя
+            //System.out.println(loginServlet.getId());
+            //LoginServlet loginServlet = new LoginServlet();
+
+            int idUser = model.getModelDate().getUser().getId(); // получить id вошедшего пользователя
+            System.out.println(idUser);
             model.createUserPassTable();
             model.addUserPass(name, site, login, password, idUser);
+
+        } else if (a.equals("new")) {
+
         }
     }
 

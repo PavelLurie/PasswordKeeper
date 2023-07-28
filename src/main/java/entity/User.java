@@ -1,24 +1,22 @@
 package entity;
 
 public class User {
-    private long id;
+    private int id;
     private String login;
     private String password;
 
-    public User(long id) {
-        this.id = id;
-    }
 
-    public User(String login, String password) {
+    public User(int id, String login, String password) {
+        this.id = id;
         this.login = login;
         this.password = password;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -41,7 +39,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "login='" + login + '\'' +
+                "id=" + id +
+                ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

@@ -1,5 +1,6 @@
 package controller;
 
+import entity.User;
 import model.UserModel;
 import model.UserModelIml;
 import jakarta.servlet.RequestDispatcher;
@@ -14,9 +15,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class SignUpServlet extends HttpServlet {
+public class SignUpServlet extends HttpServlet implements AbstractServlet{
+
     private Connection connection;
-    private UserModel model;
 
     @Override
     public void init() throws ServletException {
@@ -31,7 +32,6 @@ public class SignUpServlet extends HttpServlet {
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
-        this.model = new UserModelIml();
     }
 
     @Override
@@ -45,6 +45,9 @@ public class SignUpServlet extends HttpServlet {
 
             if (password.equals(repass)) {
                 model.createUser(login, password);
+
+
+
                 RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/signupOK.jsp");
                 dispatcher.forward(req, resp);
 

@@ -1,5 +1,6 @@
 package controller;
 
+import entity.User;
 import jakarta.servlet.annotation.WebServlet;
 import model.UserModel;
 
@@ -19,11 +20,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet implements AbstractServlet{
+
     private Connection connection;
-    private UserModel model;
-
-
 
     @Override
     public void init() throws ServletException {
@@ -38,8 +37,9 @@ public class LoginServlet extends HttpServlet {
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
-        this.model = new UserModelIml();
     }
+
+
 
 
 
@@ -50,10 +50,15 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
 
+
         if (model.isExist(login, password)){
             HttpSession session = req.getSession();
             session.setAttribute("user", login);
             resp.sendRedirect("/loginOK");
+
+            User user = model.getIdFromTable2(login, password);
+            model.getModelDate().setUser(user);
+
 
         } else {
             // вывести на этой же странице, что пароль или логин не верный.
